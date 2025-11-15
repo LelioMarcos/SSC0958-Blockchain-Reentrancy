@@ -7,7 +7,7 @@ contract Bank {
     // Utilização de modificadores para impedir reentrancy
     
     bool internal lock;
-    modifier noReetrant() {
+    modifier noReentrant() {
         require(!lock, "Sem reentrancia");
         lock = true;
         _;
@@ -18,7 +18,7 @@ contract Bank {
         balances[msg.sender] += msg.value;
     }
     
-    function withdraw() external noReetrant {
+    function withdraw() external noReentrant {
         uint256 amount = balances[msg.sender];
         require(amount >= 1, "Sem saldo suficiente");
         
